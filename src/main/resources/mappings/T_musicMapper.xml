@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.new_pro.mapper.T_musicMapper">
+  <resultMap id="BaseResultMap" type="com.new_pro.javaBean.T_music">
+    <id column="mu_id" jdbcType="VARCHAR" property="muId" />
+    <result column="mu_name" jdbcType="VARCHAR" property="muName" />
+    <result column="mu_style" jdbcType="VARCHAR" property="muStyle" />
+    <result column="mu_labels" jdbcType="VARCHAR" property="muLabels" />
+    <result column="mu_author" jdbcType="VARCHAR" property="muAuthor" />
+    <result column="mu_country" jdbcType="VARCHAR" property="muCountry" />
+    <result column="mu_date" jdbcType="INTEGER" property="muDate" />
+    <result column="mu_state" jdbcType="INTEGER" property="muState" />
+    <result column="mu_editor" jdbcType="VARCHAR" property="muEditor" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.new_pro.javaBean.T_music">
+    <result column="mu_xml" jdbcType="LONGVARCHAR" property="muXml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mu_id, mu_name, mu_style, mu_labels, mu_author, mu_country, mu_date, mu_state, mu_editor
+  </sql>
+  <sql id="Blob_Column_List">
+    mu_xml
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_music
+    where mu_id = #{muId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_music
+    where mu_id = #{muId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.new_pro.javaBean.T_music">
+    insert into t_music (mu_id, mu_name, mu_style, 
+      mu_labels, mu_author, mu_country, 
+      mu_date, mu_state, mu_editor, 
+      mu_xml)
+    values (#{muId,jdbcType=VARCHAR}, #{muName,jdbcType=VARCHAR}, #{muStyle,jdbcType=VARCHAR}, 
+      #{muLabels,jdbcType=VARCHAR}, #{muAuthor,jdbcType=VARCHAR}, #{muCountry,jdbcType=VARCHAR}, 
+      #{muDate,jdbcType=INTEGER}, #{muState,jdbcType=INTEGER}, #{muEditor,jdbcType=VARCHAR}, 
+      #{muXml,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.new_pro.javaBean.T_music">
+    insert into t_music
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="muId != null">
+        mu_id,
+      </if>
+      <if test="muName != null">
+        mu_name,
+      </if>
+      <if test="muStyle != null">
+        mu_style,
+      </if>
+      <if test="muLabels != null">
+        mu_labels,
+      </if>
+      <if test="muAuthor != null">
+        mu_author,
+      </if>
+      <if test="muCountry != null">
+        mu_country,
+      </if>
+      <if test="muDate != null">
+        mu_date,
+      </if>
+      <if test="muState != null">
+        mu_state,
+      </if>
+      <if test="muEditor != null">
+        mu_editor,
+      </if>
+      <if test="muXml != null">
+        mu_xml,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="muId != null">
+        #{muId,jdbcType=VARCHAR},
+      </if>
+      <if test="muName != null">
+        #{muName,jdbcType=VARCHAR},
+      </if>
+      <if test="muStyle != null">
+        #{muStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="muLabels != null">
+        #{muLabels,jdbcType=VARCHAR},
+      </if>
+      <if test="muAuthor != null">
+        #{muAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="muCountry != null">
+        #{muCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="muDate != null">
+        #{muDate,jdbcType=INTEGER},
+      </if>
+      <if test="muState != null">
+        #{muState,jdbcType=INTEGER},
+      </if>
+      <if test="muEditor != null">
+        #{muEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="muXml != null">
+        #{muXml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.new_pro.javaBean.T_music">
+    update t_music
+    <set>
+      <if test="muName != null">
+        mu_name = #{muName,jdbcType=VARCHAR},
+      </if>
+      <if test="muStyle != null">
+        mu_style = #{muStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="muLabels != null">
+        mu_labels = #{muLabels,jdbcType=VARCHAR},
+      </if>
+      <if test="muAuthor != null">
+        mu_author = #{muAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="muCountry != null">
+        mu_country = #{muCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="muDate != null">
+        mu_date = #{muDate,jdbcType=INTEGER},
+      </if>
+      <if test="muState != null">
+        mu_state = #{muState,jdbcType=INTEGER},
+      </if>
+      <if test="muEditor != null">
+        mu_editor = #{muEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="muXml != null">
+        mu_xml = #{muXml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mu_id = #{muId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.new_pro.javaBean.T_music">
+    update t_music
+    set mu_name = #{muName,jdbcType=VARCHAR},
+      mu_style = #{muStyle,jdbcType=VARCHAR},
+      mu_labels = #{muLabels,jdbcType=VARCHAR},
+      mu_author = #{muAuthor,jdbcType=VARCHAR},
+      mu_country = #{muCountry,jdbcType=VARCHAR},
+      mu_date = #{muDate,jdbcType=INTEGER},
+      mu_state = #{muState,jdbcType=INTEGER},
+      mu_editor = #{muEditor,jdbcType=VARCHAR},
+      mu_xml = #{muXml,jdbcType=LONGVARCHAR}
+    where mu_id = #{muId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.new_pro.javaBean.T_music">
+    update t_music
+    set mu_name = #{muName,jdbcType=VARCHAR},
+      mu_style = #{muStyle,jdbcType=VARCHAR},
+      mu_labels = #{muLabels,jdbcType=VARCHAR},
+      mu_author = #{muAuthor,jdbcType=VARCHAR},
+      mu_country = #{muCountry,jdbcType=VARCHAR},
+      mu_date = #{muDate,jdbcType=INTEGER},
+      mu_state = #{muState,jdbcType=INTEGER},
+      mu_editor = #{muEditor,jdbcType=VARCHAR}
+    where mu_id = #{muId,jdbcType=VARCHAR}
+  </update>
+  <update id="deleteT_musicById" parameterType="int">
+     update t_user set mu_state=-1 where mu_id=#{muId}
+  </update>
+  <!--查询全部-->
+  <select id="getAllT_music" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_music
+    where mu_state=1
+    <if test="keywords!=null and keywords!=''">
+      and ( mu_name like concat('%',#{keywords},'%'))
+    </if>
+  </select>
+</mapper>
